@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class BookService {
-    private Books books;
+    private final Books books;
 
     @Autowired
     public BookService() throws GeneralSecurityException, IOException {
@@ -23,11 +23,10 @@ public class BookService {
     }
 
     public List<Volume> getBooksByName(String name) {
-        String params = name;
         Volumes volumes = null;
 
         try {
-            Books.Volumes.List request = books.volumes().list(params);
+            Books.Volumes.List request = books.volumes().list(name);
             volumes = request.execute();
         } catch (IOException e) {
             e.printStackTrace();
